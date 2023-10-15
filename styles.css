@@ -1,3 +1,7 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
 body {
     background-image: url('images/background.jpg');
     height: 100vh;
@@ -12,7 +16,6 @@ body {
 .header {
     display: flex;
     justify-content: space-between;
-
     background: rgba(168, 155, 155, 0.3);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(8.7px);
@@ -35,8 +38,6 @@ body {
 
 }
 
-
-
 .buttons {
     display: flex;
     justify-content: center;
@@ -47,14 +48,76 @@ body {
     color: white;
     margin-right: 2vw;
     column-gap: 3vw;
-    cursor: pointer;
+    
 }
-
-
-
-
 
 img {
     height: 10vh;
     width: 7vw;
+}
+
+
+form {
+    display: none;
+    justify-content: center;
+    position: fixed;
+    width: 250px;
+    max-width: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.2);
+    border: 1px solid black;
+    padding: 1rem;
+    z-index: 10;
+    transition: 0.2s ease-in-out;
+    background-color:  white;
+}
+
+.showForm {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+}
+
+#overlay.active {
+    pointer-events: all;
+    opacity: 1;
+    transition: 200ms ease-in-out;
+}
+
+.fade-out {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+ }
+
+#closeForm {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+
+.form-title,
+.form-genre,
+.form-playtime,
+.form-played {
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+}
+
+label {
+    margin-bottom: 5%;
 }
