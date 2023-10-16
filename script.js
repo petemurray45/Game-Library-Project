@@ -18,27 +18,27 @@ const closeTileButton = document.querySelectorAll('[data-close-tile')
 
 openFormButton.forEach(button => {
     button.addEventListener('click', () => {
-        createTile();
+        openForm();
     })
 })
 
 resetPageButton.forEach(button => {
     button.addEventListener('click', () => {
-        resetPage()
+        resetPage();
     })
 })
 
 
 closeFormButton.forEach(button => {
     button.addEventListener('click', () => {
-        closeForm()
+        closeForm();
         
     })
 })
 
 closeTileButton.forEach(button => {
     button.addEventListener('click', () => {
-        closeTile()
+        closeTile();
     })
 })
 
@@ -71,18 +71,31 @@ function closeTile(){
 }
 
 function resetPage(){
-    gameTile.remove()
+    document.querySelectorAll('.gameTile').forEach( e => {
+        e.parentNode.removeChild(e)
+    })
+    
 }
 
 function createTile(){
     const newTile = document.createElement('div');
-    mainBodyElement.appendChild(newTile);
     newTile.classList.add('gameTile');
+    const closeButton = document.createElement('button');
+    closeButton.setAttribute('data', 'close-tile');
+    closeButton.classList.add('tileCloseButton')
+    const genreText = document.createElement('p');
+    genreText.classList.add('gameGenre');
+    const playTime = document.createElement('p');
+    playTime.classList.add('gamePlayTime');
+
+
+
+    mainBodyElement.appendChild(newTile);
+    newTile.appendChild(closeButton);
+    newTile.appendChild(genreText);
+    newTile.appendChild(playTime);
+    
     
 }
-
-
-
-
 
 closeFormButton()
