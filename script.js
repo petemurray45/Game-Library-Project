@@ -9,14 +9,25 @@ function addBooksRead(name, author, pages, read){
 
 const openFormButton = document.querySelectorAll('[data-new]')
 const closeFormButton = document.querySelectorAll('[data-close]')
+const resetPageButton = document.querySelectorAll('[data-reset]')
 const addGame = document.getElementById('game-form')
 const overlay = document.getElementById('overlay')
+const gameTile = document.getElementById('gameTile')
+const mainBodyElement = document.getElementById('mainBody')
+const closeTileButton = document.querySelectorAll('[data-close-tile')
 
 openFormButton.forEach(button => {
     button.addEventListener('click', () => {
-        openForm()
+        createTile();
     })
 })
+
+resetPageButton.forEach(button => {
+    button.addEventListener('click', () => {
+        resetPage()
+    })
+})
+
 
 closeFormButton.forEach(button => {
     button.addEventListener('click', () => {
@@ -24,6 +35,13 @@ closeFormButton.forEach(button => {
         
     })
 })
+
+closeTileButton.forEach(button => {
+    button.addEventListener('click', () => {
+        closeTile()
+    })
+})
+
 
 
 function openForm() {
@@ -47,5 +65,24 @@ function closeForm(){
         addGame.style = '';
     })
 }
+
+function closeTile(){
+    gameTile.remove()
+}
+
+function resetPage(){
+    gameTile.remove()
+}
+
+function createTile(){
+    const newTile = document.createElement('div');
+    mainBodyElement.appendChild(newTile);
+    newTile.classList.add('gameTile');
+    
+}
+
+
+
+
 
 closeFormButton()
