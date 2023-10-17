@@ -158,7 +158,7 @@ label {
     display: grid;
     overflow: auto;
     gap: 4%;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, minmax(300px, 500px));
     grid-template-rows: repeat(200px, 1fr);
     padding: 4%;
 }
@@ -167,12 +167,9 @@ label {
     background-color: white;
     color: white;
     font-size: 1.0rem;
-    max-width: 100%;
-    padding: 4%;
-    padding-left: 7%;
-    padding-right: 7%;
+    padding: 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    align-items: center;
     grid-auto-rows: 50px;
     row-gap: 1%;
     background: rgba(168, 155, 155, 0.3);
@@ -211,7 +208,7 @@ label {
 }
 
 .havePlayed {
-    grid-area: 4 / 2 / 5 / 3;
+    grid-area: 4 / 3 / 5 / 4;
     display: flex;
     justify-content: center;
     
@@ -237,7 +234,7 @@ label {
 .switch {
     display: inline-block;
     text-align: center;
-    font-size: 25px; /* 1 */
+    font-size: 21px; /* 1 */
     height: 1em;
     width: 2em;
     background: rgba(168, 155, 155, 0.3);
