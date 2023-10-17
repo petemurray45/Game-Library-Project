@@ -1,11 +1,20 @@
-let booksRead = [];
 
-function addBooksRead(name, author, pages, read){
+///// games played
+
+let gamesPlayed = [];
+
+function Game(name, genre, playtime, played){
     this.name = name;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+    this.genre = genre;
+    this.playtime = playtime;
+    this.played = played;
+    
 }
+
+
+
+
+/////  DOM elements
 
 const openFormButton = document.querySelectorAll('[data-new]')
 const closeFormButton = document.querySelectorAll('[data-close]')
@@ -14,7 +23,15 @@ const addGame = document.getElementById('game-form')
 const overlay = document.getElementById('overlay')
 const gameTile = document.getElementById('gameTile')
 const mainBodyElement = document.getElementById('mainBody')
-const closeTileButton = document.querySelectorAll('[data-close-tile')
+const closeTileButton = document.querySelectorAll('[data-close-tile]')
+const form = document.querySelector('form');
+const gameTitle = document.getElementById('title');
+const gameGenre = document.getElementById('genre');
+const playTime = document.getElementById('playTime');
+const played = document.getElementById('played')
+
+
+///// event listeners
 
 openFormButton.forEach(button => {
     button.addEventListener('click', () => {
@@ -42,7 +59,31 @@ closeTileButton.forEach(button => {
     })
 })
 
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
 
+    
+    const game = new Game(gameTitle.value, gameGenre.value, playTime.value, played.checked);
+    if (gamesPlayed.includes(game.gameTitle)){
+        alert('This game is already included in the library')
+    } else {
+        addGametoLibrary(Game);
+    } console.log(Game);
+
+
+})
+
+
+
+
+
+
+///// functions
+
+
+function addGametoLibrary(){
+    this.gamesPlayed.push(Game);
+}
 
 function openForm() {
     if(!addGame.classList.contains('showForm')){
@@ -67,7 +108,7 @@ function closeForm(){
 }
 
 function closeTile(){
-    gameTile.remove()
+    gameTile.forEach(remove());
 }
 
 function resetPage(){
@@ -77,25 +118,44 @@ function resetPage(){
     
 }
 
-function createTile(){
-    const newTile = document.createElement('div');
-    newTile.classList.add('gameTile');
-    const closeButton = document.createElement('button');
-    closeButton.setAttribute('data', 'close-tile');
-    closeButton.classList.add('tileCloseButton')
-    const genreText = document.createElement('p');
-    genreText.classList.add('gameGenre');
-    const playTime = document.createElement('p');
-    playTime.classList.add('gamePlayTime');
+function createTile(gamesPlayed){
+
+    mainBodyElement.forEach(gamesPlayed => {
+
+        
 
 
 
-    mainBodyElement.appendChild(newTile);
-    newTile.appendChild(closeButton);
-    newTile.appendChild(genreText);
-    newTile.appendChild(playTime);
+
+        const newTile = document.createElement('div');
+        newTile.classList.add('gameTile');
+
+        const closeButton = document.createElement('button');
+        closeButton.setAttribute('data', 'close-tile');
+        closeButton.innerHTML = '&times;'
+        closeButton.classList.add('tileCloseButton')
+
+        const genreText = document.createElement('p');
+        genreText.classList.add('gameGenre');
+
+        const playTime = document.createElement('p');
+        playTime.classList.add('gamePlayTime');
+
+
+
+        mainBodyElement.appendChild(newTile);
+        newTile.appendChild(closeButton);
+        newTile.appendChild(genreText);
+        newTile.appendChild(playTime);
+        
+    })
+
+
+
+
+
+  
     
     
 }
 
-closeFormButton()
