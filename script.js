@@ -3,16 +3,13 @@
 
 let gamesPlayed = [];
 
-function Game(name, genre, playtime, played){
-    this.name = name;
-    this.genre = genre;
-    this.playtime = playtime;
-    this.played = played;
+function Game(title, genre, timePlayed, havePlayed){
+    this.title = title
+    this.genre = genre
+    this.timePlayed = timePlayed
+    this.havePlayed = havePlayed
     
 }
-
-
-
 
 /////  DOM elements
 
@@ -27,8 +24,8 @@ const closeTileButton = document.querySelectorAll('[data-close-tile]')
 const form = document.querySelector('form');
 const gameTitle = document.getElementById('title');
 const gameGenre = document.getElementById('genre');
-const playTime = document.getElementById('playTime');
-const played = document.getElementById('played')
+const playTime = document.getElementById('play-time');
+const played = document.getElementById('played');
 
 
 ///// event listeners
@@ -59,23 +56,26 @@ closeTileButton.forEach(button => {
     })
 })
 
+///// creates new game object to be displayed on tile
+
 form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
+    e.preventDefault(); // prevents submit button from reloading page instead of storing data
     
-    const game = new Game(gameTitle.value, gameGenre.value, playTime.value, played.checked);
-    if (gamesPlayed.includes(game.gameTitle)){
-        alert('This game is already included in the library')
-    } else {
-        addGametoLibrary(Game);
-    } console.log(Game);
+   
+    let newTitle = document.getElementById('game-title').value;
+    let newGenre = document.getElementById('genre').value;
+    let newPlayTime = document.getElementById('play-time').value;
+    let newPlayed = document.getElementById('played').value;
 
+    const newObject = new Game(newTitle, newGenre, newPlayTime, newPlayed);
+    console.log(newObject);
+    gamesPlayed.push(newObject);
+    document.forms[0].reset();
+
+    closeForm();
+    
 
 })
-
-
-
-
 
 
 ///// functions
@@ -118,43 +118,25 @@ function resetPage(){
     
 }
 
-function createTile(gamesPlayed){
 
-    mainBodyElement.forEach(gamesPlayed => {
+function newObj(){
+    let newTitle = document.getElementById('game-title').value;
+    let newGenre = document.getElementById('genre').value;
+    let newPlayTime = document.getElementById('play-time').value;
+    let newPlayed = document.getElementById('played').value;
 
-        
+    const newObject = new Game(newTitle, newGenre, newPlayTime, newPlayed);
+    console.log(newObject);
+    gamesPlayed.push(newObject);
+    document.forms[0].reset();
 
+}
 
+//// creates tiles with form elements displayed in a tile
 
+function createTile(){
 
-        const newTile = document.createElement('div');
-        newTile.classList.add('gameTile');
-
-        const closeButton = document.createElement('button');
-        closeButton.setAttribute('data', 'close-tile');
-        closeButton.innerHTML = '&times;'
-        closeButton.classList.add('tileCloseButton')
-
-        const genreText = document.createElement('p');
-        genreText.classList.add('gameGenre');
-
-        const playTime = document.createElement('p');
-        playTime.classList.add('gamePlayTime');
-
-
-
-        mainBodyElement.appendChild(newTile);
-        newTile.appendChild(closeButton);
-        newTile.appendChild(genreText);
-        newTile.appendChild(playTime);
-        
-    })
-
-
-
-
-
-  
+    console.log(this.title());
     
     
 }
