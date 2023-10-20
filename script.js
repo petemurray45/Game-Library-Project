@@ -8,7 +8,6 @@ function Game(title, genre, timePlayed, havePlayed){
     this.genre = genre
     this.timePlayed = timePlayed
     this.havePlayed = havePlayed
-    
 }
 
 /////  DOM elements
@@ -22,7 +21,7 @@ const gameTile = document.getElementById('gameTile')
 const mainBodyElement = document.getElementById('mainBody')
 const closeTileButton = document.querySelectorAll('[data-close-tile]')
 const form = document.querySelector('form');
-const gameTitle = document.getElementById('title');
+const gameTitle = document.querySelectorAll('[data-title]');
 const gameGenre = document.getElementById('genre');
 const playTime = document.getElementById('play-time');
 const played = document.getElementById('played');
@@ -42,7 +41,6 @@ resetPageButton.forEach(button => {
     })
 })
 
-
 closeFormButton.forEach(button => {
     button.addEventListener('click', () => {
         closeForm();
@@ -52,7 +50,7 @@ closeFormButton.forEach(button => {
 
 closeTileButton.forEach(button => {
     button.addEventListener('click', (e) => {
-        e.parentNode.remove();
+        e.target.removeP
     })
 })
 
@@ -65,20 +63,20 @@ form.addEventListener('submit', (e) => {
     let newTitle = document.getElementById('game-title').value;
     let newGenre = document.getElementById('genre').value;
     let newPlayTime = document.getElementById('play-time').value;
-    let newPlayed = document.getElementById('played').value;
 
-    const newObject = new Game(newTitle, newGenre, newPlayTime, newPlayed);
+    const newObject = new Game(newTitle, newGenre, newPlayTime);
     console.log(newObject);
     gamesPlayed.push(newObject);
     document.forms[0].reset();
 
-    createTile(newObject);
-
-    closeForm();
-    
+    if(gameGenre === ''){
+        closeForm();
+    } else if(newGenre.length > 0){
+        createTile(newObject);
+        closeForm();
+    }
 
 })
-
 
 ///// functions
 
@@ -109,10 +107,6 @@ function closeForm(){
     })
 }
 
-function closeTile(){
-    gameTile.forEach(remove());
-}
-
 function resetPage(){
     document.querySelectorAll('.gameTile').forEach( e => {
         e.parentNode.removeChild(e)
@@ -120,12 +114,12 @@ function resetPage(){
     
 }
 
-
 function newObj(){
     let newTitle = document.getElementById('game-title').value;
     let newGenre = document.getElementById('genre').value;
     let newPlayTime = document.getElementById('play-time').value;
     let newPlayed = document.getElementById('played').value;
+
 
     const newObject = new Game(newTitle, newGenre, newPlayTime, newPlayed);
     console.log(newObject);
@@ -138,48 +132,26 @@ function newObj(){
 
 function createTile(object){
 
-    const newTile = document.createElement('div');
-    newTile.classList.add('gameTile');
+    const newTile = gameTile.cloneNode(true);
+
+    const cloneTitle = newTile.querySelectorAll('p');
+
+    cloneTitle.forEach((element) => {
+        if(element.classList.contains('gameTitle')){
+            element.innerText = object.title;
+        } else if(element.classList.contains('gameGenre')){
+            element.innerText = object.genre;
+        } else if(element.classList.contains('gamePlayTime')){
+            element.innerText = object.timePlayed;
+        } else {
+            return;
+        }
+    })
 
     mainBodyElement.appendChild(newTile);
+   
 
-    const closeButton = document.createElement('button');
-    closeButton.classList.add('tileCloseButton');
-    closeButton.innerHTML = '&times;'
-    closeButton.setAttribute('data', 'close-tile');
-    newTile.appendChild(closeButton);
-
-    newTile.appendChild(closeButton);
-
-    const newGameTitle = document.createElement('p');
-    newGameTitle.classList.add('gameTitle');
-    newGameTitle.innerText = object.title;
-    newTile.appendChild(newGameTitle);
-
-    const genreText = document.createElement('p');
-    genreText.classList.add('gameGenre');
-    genreText.innerText = object.genre;
-    newTile.appendChild(genreText);
-
-    const gamePlayTime = document.createElement('p');
-    gamePlayTime.classList.add('gamePlayTime');
-    gamePlayTime.innerText = object.timePlayed;
-    newTile.appendChild(gamePlayTime);
-
-    const gamePlayed = document.createElement('p');
-    gamePlayed.classList.add('havePlayed');
-    newTile.appendChild(gamePlayed);
-
-
-    const gamePlayedText = document.createElement('span');
-    gamePlayedText.innerText = 'Played:'
-    gamePlayed.appendChild(gamePlayedText);
-
-    const switchContainer = document.createElement('div');
-    const switctLabel = document.createElement('label');
-    const switchDiv = document.createElement('div');
-    switctLabel.classList.add('switch');
-    switchContainer.classList.add('switchContainer');
+    
 
 
 
