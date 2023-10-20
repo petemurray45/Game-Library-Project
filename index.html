@@ -23,39 +23,39 @@
 
     <form id="game-form" class="form">
 
-        <button data-close id="closeForm">&times;</button>
+        <div class="closeButtonDiv">
+            <button data-close id="closeForm">&times;</button>
+
+        </div>
+
         <div class="form-title">
-            <label for="title">Title</label>
+            <label for="title" class="formLabel">Title</label>
             <input type="text" name="title" id="game-title" placeholder="Title" maxlength="50">
         </div>
 
         <div class="form-genre">
-            <label for="genre">Genre:</label>
+            <label for="genre" class="formLabel">Genre:</label>
             <input type="text" name="genre" id="genre" placeholder="Action Adventure" maxlength="50">
         </div>
 
         <div class="form-playtime">
-            <label for="playtime">Play-time</label>
+            <label for="playtime" class="formLabel">Play-time:</label>
             <input type="text" name="playTime" id="play-time" placeholder="30 Hours" maxlength="10">
         </div>
 
-        <div class="form-played">
-            <label class="label" for="played">Played?</label>
-            <div class="checkBox">
-                <input type="checkbox" name="played" id="played">
-                <label for="played"></label>
-            </div>
+        <div class="buttonDiv">
+            <button class="submitButton">Submit</button>
+
         </div>
 
-        <button>Submit</button>
 
     </form>
 
     <div id="mainBody" class='mainBody'>
 
         <div data-game-tile id="gameTile" class="gameTile">
-            <p class="gameTitle">Title</p>
-            <button data-close-tile class="tileCloseButton">&times;</button>
+            <p data-title class="gameTitle">Call of Duty</p>
+            <button data-close-tile class="tileCloseButton" onclick="this.parentNode.remove()">&times;</button>
             <p class="gameGenre">Action</p>
             <p class="gamePlayTime">30 Hours</p>
             <p class="havePlayed">
